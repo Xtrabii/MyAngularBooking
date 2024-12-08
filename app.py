@@ -3,7 +3,6 @@ from flask_cors import CORS
 import pymysql
 import bcrypt
 
-
 app = Flask(__name__)
 CORS(app)
 
