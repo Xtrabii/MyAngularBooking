@@ -57,3 +57,13 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+อย่างแรก เปิด Terminal ที่เป็น cmd แล้ว cd ไปที่ Folder Angular-Backend จากนั้นให้รันทั้ง 4 คำสั่งด้านล่างเพื่อติดตั้ง
+pip install Flask
+pip install -U flask-cors
+pip install pymysql
+pip install bcrypt
+
+ต่อมาเปิดอีก Terminal ที่เป็น cmd แล้ว cd myangularbooking เสร็จแล้วรันคำสั่ง ng serve -o
+หลังจากหน้าเว็ป angular เปิดได้แล้วให้ไปที่ app.py กดปุ่ม run ด้านขวาบน เพื่อ start server api หน้าเว็ป angular ก็จะแสดงข้อมูลต่างๆ
