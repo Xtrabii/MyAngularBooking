@@ -66,4 +66,5 @@ pip install pymysql
 pip install bcrypt
 
 ต่อมาเปิดอีก Terminal ที่เป็น cmd แล้ว cd myangularbooking เสร็จแล้วรันคำสั่ง ng serve -o
+เปิด xampp start Apache and MySQL
 หลังจากหน้าเว็ป angular เปิดได้แล้วให้ไปที่ app.py กดปุ่ม run ด้านขวาบน เพื่อ start server api หน้าเว็ป angular ก็จะแสดงข้อมูลต่างๆ
