@@ -35,7 +35,7 @@
               <span>{{ username }}</span> 
             </a>
             <ul class="dropdown-menu text-small">
-              <li><a class="dropdown-item" routerLink="/booking-detail">Booking History</a></li>
+              <li *ngIf="isLoggedIn"><a class="dropdown-item" routerLink="/booking-detail">Booking History</a></li>
               <li *ngIf="!isLoggedIn">
                 <a class="dropdown-item" routerLink="/login">Login</a>
               </li>

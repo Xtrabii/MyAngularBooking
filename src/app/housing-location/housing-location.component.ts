@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   template: `
   <body>
     <div class="row col align-items-stretch g-4 py-1">
-        <!-- card1 -->
+
         <div class="col">
           <div class="card shadow-sm">
             <span class="badge text-bg-primary" style="font-size: 15px;">{{ housingLocation.city }}</span>

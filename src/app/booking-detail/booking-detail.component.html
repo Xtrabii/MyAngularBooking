@@ -1,17 +1,30 @@
 <br><br><br>
 <div *ngIf="bookingDetails$ | async as bookingDetails" class="container box">
-    <h2>Booking Details</h2>
-    <p><strong>First Name:</strong> {{ bookingDetails.firstName }}</p>
-    <p><strong>Last Name:</strong> {{ bookingDetails.lastName }}</p>
-    <p><strong>Email:</strong> {{ bookingDetails.email }}</p>
-    <p><strong>Phone Number:</strong> {{ bookingDetails.phoneNumber }}</p>
-    <p><strong>Hotel Name:</strong> {{ bookingDetails.hotel_name }}</p>
-    <p><strong>Check-in Date:</strong> {{ bookingDetails.checkinDate }}</p>
-    <p><strong>Check-out Date:</strong> {{ bookingDetails.checkoutDate }}</p>
-    <p><strong>Stay Duration:</strong> {{ bookingDetails.stayDuration }}</p>
-    <p><strong>Total Price:</strong> {{ bookingDetails.totalPrice }}</p>
-    <p><strong>VAT:</strong> {{ bookingDetails.vat }}</p>
-    <p><strong>Grand Total:</strong> {{ bookingDetails.grandTotal }}</p>
-    <p><strong>Payment Method:</strong> {{ bookingDetails.paymentMethod }}</p>
-  </div>
+  <nav class="p-3 mb-3 border-bottom border-body box" style="background-color: #ffffff;">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" >
+      <!-- menu -->
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 nav-underline">
+        <li><a class="nav-link px-2 link-body-emphasis active"><i class="fa-solid fa-hotel"></i> ประวัติการจอง</a></li>
+      </ul>
+    </div>
+</nav> 
+<div *ngIf="bookingDetails$ | async as bookingDetails; else loading" class="container box">
   
+  <div *ngFor="let booking of bookingDetails" class="container box p-3">
+    <p><i class="fa-solid fa-hotel"></i> <strong> Hotel :</strong> {{ booking.hotelName }}</p>
+    <p><strong>Name :</strong> {{ booking.firstName }} {{ booking.lastName }}</p>
+    <p><strong>Email :</strong> {{ booking.email }}</p>
+    <p><strong>Phone Number :</strong> {{ booking.phoneNumber }}</p>
+    <p><strong>Check-in Date :</strong> {{ booking.checkinDate }}</p>
+    <p><strong>Check-out Date :</strong> {{ booking.checkoutDate }}</p>
+    <p><strong>Stay Duration :</strong> {{ booking.stayDuration }} วัน</p>
+    <p><strong>Total Price :</strong> {{ booking.totalPrice }} THB</p>
+    <p><strong>VAT :</strong> {{ booking.vat }} THB</p>
+    <p><strong>Grand Total :</strong> {{ booking.grandTotal }} THB</p>
+    <p><strong>Payment Method :</strong> {{ booking.paymentMethod }}</p>
+
+  </div>
+</div>
+<ng-template #loading>Loading...</ng-template>
+</div>
+

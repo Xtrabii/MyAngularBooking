@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Housinglocation } from './housinglocation';
+import { BookingDetails } from './booking-detail/booking-detail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,10 @@ export class HousingService {
     return this.http.get<Housinglocation>(`${this.apibyID}/${id}`);
   }
 
-  // Fixed getBookingDetails URL
-  getBookingDetails(): Observable<any> {
-    return this.http.get(this.bookingUrl);  // Correct API endpoint
-  }
+  // แก้ไขให้ใช้ type BookingDetails
+  getBookingDetails(): Observable<BookingDetails[]> {
+  return this.http.get<BookingDetails[]>('http://localhost:5000/get_booking_details');
+}
+
+  
 }

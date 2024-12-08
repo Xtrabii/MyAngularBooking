@@ -5,7 +5,7 @@ import { Housinglocation } from '../housinglocation';
 import { HousingService } from '../housing.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-hotel',
   standalone: true,
   imports: [CommonModule, HousingLocationComponent],
   template: `
@@ -16,21 +16,14 @@ import { HousingService } from '../housing.service';
       <br><br>
       <!-- Search Hotel -->
       <div class="input-group rounded col-6">
-        <input 
-          type="search" 
-          class="form-control rounded" 
-          placeholder="Search Hotel" 
-          aria-label="Search" 
-          aria-describedby="search-addon" 
-        />
-        <span class="input-group-text border-0" id="search-addon">
-          <i class="fas fa-search"></i>
-        </span>
+        <input type="search" class="form-control rounded" placeholder="Search Hotel" #filter>
+        <button class="btn btn-dark" (click)="filterResults(filter.value)">Search</button>
       </div>
     </section>
     <section class="results">
+      <!-- Display filtered or all housing locations -->
       <app-housing-location 
-        *ngFor="let housingLocation of housingLocationList" 
+        *ngFor="let housingLocation of filteredLocationList.length > 0 ? filteredLocationList : housingLocationList" 
         [housingLocation]="housingLocation">
       </app-housing-location>
     </section>
@@ -40,6 +33,7 @@ import { HousingService } from '../housing.service';
 })
 export class HotelComponent implements OnInit {
   housingLocationList: Housinglocation[] = [];
+  filteredLocationList: Housinglocation[] = [];
   housingService: HousingService = inject(HousingService);
 
   ngOnInit(): void {
@@ -47,10 +41,22 @@ export class HotelComponent implements OnInit {
     this.housingService.loadHousingLocations().subscribe({
       next: (data) => {
         this.housingLocationList = data;
+        this.filteredLocationList = data; // เริ่มต้นให้แสดงทั้งหมด
       },
       error: (err) => {
         console.error('Error loading housing locations:', err);
       }
     });
+  }
+
+  // ฟังก์ชันกรองข้อมูลตามคำค้นหา
+  filterResults(text: string): void {
+    if (!text) {
+      this.filteredLocationList = this.housingLocationList; // ถ้าไม่มีคำค้นหา แสดงผลทั้งหมด
+      return;
+    }
+    this.filteredLocationList = this.housingLocationList.filter(location =>
+      location.name.toLowerCase().includes(text.toLowerCase()) // กรองตามชื่อที่ตรงกับคำค้นหา
+    );
   }
 }

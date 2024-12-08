@@ -1,9 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { HousingService } from '../housing.service';
-import { Housinglocation } from '../housinglocation';
+import { BookingDetails } from './booking-detail.model';// นำเข้าจากไฟล์ที่สร้าง
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,14 +12,17 @@ import { Observable } from 'rxjs';
   templateUrl: './booking-detail.component.html',
   styleUrl: './booking-detail.component.css'
 })
-export class BookingDetailComponent {
-   bookingDetails$!: Observable<any>;  // ใช้ Observable เพื่อเก็บข้อมูล booking
+export class BookingDetailComponent implements OnInit {
+  bookingDetails$!: Observable<BookingDetails[]>;  // Make sure this is of type Observable<BookingDetails[]>
 
   constructor(private housingService: HousingService) {}
 
   ngOnInit(): void {
-    // ดึงข้อมูล booking details จาก API
+    // Request data from the service
     this.bookingDetails$ = this.housingService.getBookingDetails();
+    this.bookingDetails$.subscribe(
+      (data) => console.log("Booking details received:", data),
+      (error) => console.error("Error fetching booking details:", error)
+    );
   }
-
 }
