@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<title>Login</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<form class="login100-form validate-form p-b-33 p-t-5" action="check_login.php" method="POST">
+			<section class="ftco-section">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-6 text-center mb-5">
+							<h2 class="heading-section">Login</h2>
+						</div>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-md-6 col-lg-5">
+							<div class="login-wrap p-4 p-md-5">
+								<div class="icon d-flex align-items-center justify-content-center">
+									<span class="fa fa-user-o"></span>
+								</div>
+								<h3 class="text-center mb-5"></h3>
+								<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+									<div class="form-group">
+										<input type="text" name="m_user" class="form-control rounded-left" formControlName="username"  placeholder="Username" required>
+									</div>
+									<div class="form-group d-flex">
+										<input type="password" name="m_pass" class="form-control rounded-left" formControlName="password"  placeholder="Password" required>
+									</div>
+									<div class="form-group d-md-flex">
+										<div class="w-50">
+											<label class="checkbox-wrap checkbox-primary">Remember Me
+												<input type="checkbox" checked>
+												<span class="checkmark"></span>
+											</label>
+										</div>
+									</div>
+									<div class="container">
+										<div class="row justify-content-center">
+											<div class="col-md-12">
+												<button type="submit" class="btn btn-dark rounded submit p-3 px-5 w-100 mb-3">Login</button>
+											</div>
+											<div class="col-md-6">
+												<button (click)="goToRegister()" class="btn btn-outline rounded submit w-100">Register</button>
+											</div>
+										</div>
+									</div>
+									
+									
+								</form>
+								
+							</div>
+							
+						</div>
+					</div>
+					
+				</div>
+			</section>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<br><br><br>
+<div *ngIf="bookingDetails$ | async as bookingDetails" class="container box">
+    <h2>Booking Details</h2>
+    <p><strong>First Name:</strong> {{ bookingDetails.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ bookingDetails.lastName }}</p>
+    <p><strong>Email:</strong> {{ bookingDetails.email }}</p>
+    <p><strong>Phone Number:</strong> {{ bookingDetails.phoneNumber }}</p>
+    <p><strong>Hotel Name:</strong> {{ bookingDetails.hotel_name }}</p>
+    <p><strong>Check-in Date:</strong> {{ bookingDetails.checkinDate }}</p>
+    <p><strong>Check-out Date:</strong> {{ bookingDetails.checkoutDate }}</p>
+    <p><strong>Stay Duration:</strong> {{ bookingDetails.stayDuration }}</p>
+    <p><strong>Total Price:</strong> {{ bookingDetails.totalPrice }}</p>
+    <p><strong>VAT:</strong> {{ bookingDetails.vat }}</p>
+    <p><strong>Grand Total:</strong> {{ bookingDetails.grandTotal }}</p>
+    <p><strong>Payment Method:</strong> {{ bookingDetails.paymentMethod }}</p>
+  </div>
+  

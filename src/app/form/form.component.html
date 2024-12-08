@@ -1,0 +1,181 @@
+<br><br><br>
+
+<div class="container box">
+
+    <nav class="p-3 mb-3 border-bottom border-body box" style="background-color: #ffffff;">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" >
+          <!-- menu -->
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 nav-underline">
+            <li><a class="nav-link px-2 link-body-emphasis active"><i class="fa-solid fa-hotel"></i> จองที่พัก</a></li>
+          </ul>
+        </div>
+    </nav>  
+
+<!-- Form กรอกข้อมูล -->
+<div *ngIf="showInfoForm">
+  <form class="row g-3 needs-validation" #infoForm="ngForm" (ngSubmit)="goToCheckout()" novalidate>
+    <!-- ชื่อจริง -->
+    <div class="col-md-4">
+      <label class="form-label">ชื่อจริง</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="firstName"
+        name="firstName"
+        placeholder="ชื่อจริง(ไม่ต้องมีคำนำหน้า)"
+        #firstNameInput="ngModel"
+        required
+      />
+      <div *ngIf="firstNameInput.invalid && firstNameInput.touched" class="text-danger">
+        กรุณากรอกชื่อจริง
+      </div>
+    </div>
+    <!-- นามสกุล -->
+    <div class="col-md-4">
+      <label class="form-label">นามสกุล</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="lastName"
+        name="lastName"
+        placeholder="นามสกุล"
+        #lastNameInput="ngModel"
+        required
+      />
+      <div *ngIf="lastNameInput.invalid && lastNameInput.touched" class="text-danger">
+        กรุณากรอกนามสกุล
+      </div>
+    </div>
+    <!-- เบอร์โทรศัพท์ -->
+    <div class="col-md-4">
+      <label class="form-label">เบอร์โทรศัพท์</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="phone"
+        name="phone"
+        placeholder="เบอร์โทรศัพท์"
+        #phoneInput="ngModel"
+        required
+        pattern="[0-9]{10}"
+      />
+      <div *ngIf="phoneInput.invalid && phoneInput.touched" class="text-danger">
+        กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (10 หลัก)
+      </div>
+    </div>
+     <!-- โรงแรม -->
+     <div class="col-md-4">
+      <label class="form-label">ที่พัก</label>
+      <input
+        class="form-control"
+        type="text"
+        [value]="housingLocation?.name"
+        readonly
+      />
+    </div>
+    <!-- วันที่เช็คอิน -->
+    <div class="col-md-3">
+      <label class="form-label">วันที่เช็คอิน</label>
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="checkinDate"
+        name="checkinDate"
+        (change)="calculateCheckoutDate()"
+        #checkinDateInput="ngModel"
+        required
+      />
+      <div *ngIf="checkinDateInput.invalid && checkinDateInput.touched" class="text-danger">
+        กรุณาเลือกวันที่เช็คอิน
+      </div>
+    </div>
+    <!-- จำนวนวันที่พัก -->
+    <div class="col-md-3">
+      <label class="form-label">จำนวนวันที่พัก</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="stayDuration"
+        name="stayDuration"
+        min="1"
+        max="30"
+        (change)="calculateCheckoutDate()"
+        #stayDurationInput="ngModel"
+        required
+      />
+      
+      <div *ngIf="stayDurationInput.invalid && stayDurationInput.touched" class="text-danger">
+        กรุณากรอกจำนวนวันที่พัก (ระหว่าง 1-30)
+      </div>
+    </div>
+     <!-- วันที่เช็คเอ้าท์ -->
+     <div class="col-md-3">
+      <label class="form-label">วันที่เช็คเอ้าท์</label>
+      <input
+        class="form-control"
+        type="text"
+        [value]="checkoutDate"
+        readonly
+      />
+    </div>
+    <!-- ปุ่ม -->
+    <div class="col-12 text-end p-4">
+      <button class="btn btn-primary" type="submit" [disabled]="infoForm.invalid">
+        ต่อไป
+      </button>
+    </div>
+  </form>
+</div>
+  
+  <!-- Form ชำระเงิน -->
+  <div *ngIf="showCheckoutForm">
+    <form class="row g-3 needs-validation" novalidate>
+      <!-- ราคาที่พัก -->
+      <div class="col-md-4">
+        <label class="form-label">ราคาที่พัก</label>
+        <input
+          class="form-control"
+          type="text"
+          [value]="housingLocation?.price"
+          readonly
+        />
+      </div>
+      <!-- ราคารวม -->
+      <div class="col-md-4">
+        <label class="form-label">ราคารวม</label>
+        <input class="form-control" type="text" [value]="totalPrice" readonly />
+      </div>
+      <!-- Vat -->
+      <div class="col-md-4">
+        <label class="form-label">Vat (7%)</label>
+        <input class="form-control" type="text" [value]="vat" readonly />
+      </div>
+      <!-- ยอดรวม -->
+      <div class="col-md-4">
+        <label class="form-label">ยอดรวม</label>
+        <input class="form-control" type="text" [value]="grandTotal" readonly />
+      </div>
+      <!-- ช่องทางชำระเงิน -->
+      <div class="col-md-3">
+        <label class="form-label">ช่องทางชำระเงิน</label>
+        <select
+          class="form-select"
+          [(ngModel)]="paymentMethod"
+          name="paymentMethod"
+          required
+        >
+          <option value="" disabled selected>Choose Payment Method</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="Mobile Banking">Mobile Banking</option>
+          <option value="QR Code">QR Code</option>
+        </select>
+      </div>
+      <!-- ปุ่ม -->
+      <div class="col-12 text-end p-4">
+        <button class="btn btn-danger me-2" type="button" (click)="goBackToInfoForm()">แก้ไขข้อมูล</button>
+        <button class="btn btn-primary" type="button" (click)="pay()" >ชำระเงิน</button>
+      </div>
+    </form>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
