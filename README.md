@@ -67,4 +67,5 @@ pip install bcrypt
 
 ต่อมาเปิดอีก Terminal ที่เป็น cmd แล้ว cd myangularbooking เสร็จแล้วรันคำสั่ง ng serve -o
 เปิด xampp start Apache and MySQL
+import database โดยการสร้าง new database ชื่อ angular_database utf8_general_ci กดสร้าง และเลือก import ไฟล์ angular_database.sql
 หลังจากหน้าเว็ป angular เปิดได้แล้วให้ไปที่ app.py กดปุ่ม run ด้านขวาบน เพื่อ start server api หน้าเว็ป angular ก็จะแสดงข้อมูลต่างๆ
