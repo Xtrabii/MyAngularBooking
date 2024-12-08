@@ -58,6 +58,9 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
+แนะนำให้โหลดไฟล์จากใน googl drive เพราะใน git hub มันไม่แยก folder fontend และ backend 
+ทำให้ใน github มันมีแค่ไฟล์ frontend
+
 
 อย่างแรก เปิด Terminal ที่เป็น cmd แล้ว cd ไปที่ Folder Angular-Backend จากนั้นให้รันทั้ง 4 คำสั่งด้านล่างเพื่อติดตั้ง
 pip install Flask
